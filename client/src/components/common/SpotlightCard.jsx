@@ -35,7 +35,7 @@ export default function SpotlightCard({
           background: `radial-gradient(550px circle at var(--mouse-x) var(--mouse-y), ${glowColor}, transparent 45%)`
         }}
       />
-      <div className="relative z-10 h-full">
+      <div className="relative z-10 h-full w-full">
         {children}
       </div>
     </div>
