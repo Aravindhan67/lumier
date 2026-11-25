@@ -27,7 +27,23 @@ export const eventsSeed = [
       quote: "LUMIÈRE orchestrated our wedding like a timeless Bollywood masterpiece. The discretion, the warmth of royal hospitality, and technical brilliance were peerless.",
       author: "Radhika Singhania",
       role: "Bride"
-    }
+    },
+    reviews: [
+      {
+        author: "Radhika Singhania",
+        role: "Bride",
+        quote: "LUMIÈRE orchestrated our wedding like a timeless Bollywood masterpiece. The discretion, the warmth of royal hospitality, and technical brilliance were peerless.",
+        rating: 5,
+        date: "Verified Royal Wedding Audit"
+      },
+      {
+        author: "Harshwardhan Singhania",
+        role: "Father of the Bride",
+        quote: "The Jagmandir floating mandap took everyone's breath away. Over 450 global dignitaries were handled with seamless white-glove precision.",
+        rating: 5,
+        date: "Family Patron Review"
+      }
+    ]
   },
   {
     id: 'evt-2',

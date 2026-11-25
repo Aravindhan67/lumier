@@ -208,12 +208,56 @@ export default function HomePage({
     if (matched) {
       onSelectEvent(matched);
     } else {
-      setActivePhotoModal({
+      handleGalleryItemClick({
         title: card.title,
         category: card.tag,
         location: card.location,
         image: card.image,
         description: card.subtitle
+      });
+    }
+  };
+
+  const handleGalleryItemClick = (item) => {
+    const locLower = (item.location || '').toLowerCase();
+    const matched = events?.find(e => 
+      e.slug === item.eventSlug || 
+      e.id === item.eventId ||
+      (locLower && e.location?.toLowerCase().includes(locLower.split(',')[0].trim()))
+    );
+
+    if (matched) {
+      onSelectEvent(matched);
+    } else {
+      onSelectEvent({
+        id: item.id || 'gal-custom',
+        title: item.title,
+        slug: item.id || 'bespoke-production',
+        client: 'The Singhania & Piramal Royal Wedding',
+        category: item.category || 'Royal Mandap Scenography',
+        year: '2024',
+        location: item.location || 'Lake Pichola, Udaipur, Rajasthan',
+        guestCount: 450,
+        budgetRange: '₹3.8 Crore – ₹4.5 Crore',
+        heroImage: item.image,
+        gallery: [
+          item.image,
+          'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80',
+          'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80'
+        ],
+        headline: item.description,
+        story: item.description + ' Conceived across three majestic days on Lake Pichola, guests arrived on illuminated royal shikaras with floral garland welcomes. We designed a suspended glass mandap over the water, custom fragrance misting using Kannauj pure gulab and sandalwood, and a 24-course royal Mewari banquet curated by fourth-generation royal Khansamas.',
+        highlights: [
+          'Engineered floating lotus glass mandap with 40,000 seasonal Indian tuberoses',
+          'L-Acoustics spatial acoustic coverage tuned for waterfront stone reflections',
+          'Awadhi and Mewari royal feast prepared by fourth-generation royal Khansamas',
+          'Synchronized 400-drone aerial light choreography narrating the lineage history'
+        ],
+        testimonial: {
+          quote: "LUMIÈRE orchestrated our wedding like a timeless Bollywood masterpiece. The discretion, the warmth of royal hospitality, and technical brilliance were peerless.",
+          author: "Radhika Singhania",
+          role: "Bride"
+        }
       });
     }
   };
@@ -419,7 +463,7 @@ export default function HomePage({
           {filteredGallery.map((item) => (
             <SpotlightCard
               key={item.id}
-              onClick={() => setActivePhotoModal(item)}
+              onClick={() => handleGalleryItemClick(item)}
               className="group cursor-pointer bg-white border border-paper-300 hover:border-gold-400 rounded-3xl overflow-hidden flex flex-col justify-between shadow-lux transition-all"
             >
               <div className="relative h-64 overflow-hidden bg-paper-100">
@@ -648,22 +692,38 @@ export default function HomePage({
                 <p className="text-xs text-paper-200 font-light max-w-xl">
                   {activePhotoModal.description}
                 </p>
+                <div className="flex items-center gap-2 pt-1">
+                  <span className="text-gold-300 font-serif font-bold text-sm">₹3.8 – ₹4.5 Crore</span>
+                  <span className="text-[10px] text-paper-200">• ★ 5.0 Verified Patron Rating</span>
+                </div>
               </div>
             </div>
 
-            <div className="p-4 bg-paper-50 flex items-center justify-between border-t border-paper-200">
-              <span className="text-xs text-ink-600 font-light">
+            <div className="p-4 bg-paper-50 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-paper-200">
+              <span className="text-xs text-ink-600 font-light text-center sm:text-left">
                 Commission a bespoke production in this aesthetic.
               </span>
-              <button
-                onClick={() => {
-                  setActivePhotoModal(null);
-                  onOpenBooking();
-                }}
-                className="btn-gold px-5 py-2 rounded-xl text-xs uppercase tracking-widest font-bold shadow-lux"
-              >
-                Inquire
-              </button>
+              <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                <button
+                  onClick={() => {
+                    const toOpen = activePhotoModal;
+                    setActivePhotoModal(null);
+                    handleGalleryItemClick(toOpen);
+                  }}
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-gold-900 bg-gold-100 hover:bg-gold-200 border border-gold-300 transition-all whitespace-nowrap"
+                >
+                  View Details & Reviews →
+                </button>
+                <button
+                  onClick={() => {
+                    setActivePhotoModal(null);
+                    onOpenBooking();
+                  }}
+                  className="btn-gold px-4 py-2 rounded-xl text-xs uppercase tracking-widest font-bold shadow-lux whitespace-nowrap"
+                >
+                  Inquire
+                </button>
+              </div>
             </div>
           </div>
         </div>

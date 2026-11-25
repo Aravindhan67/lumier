@@ -11,7 +11,7 @@ import {
   Camera 
 } from 'lucide-react';
 
-export default function CaseStudyModal({ event, isOpen, onClose, onBookEvent }) {
+export default function CaseStudyModal({ event, isOpen, onClose, onBookEvent, onViewFullPage }) {
   if (!isOpen || !event) return null;
 
   return (
@@ -157,17 +157,30 @@ export default function CaseStudyModal({ event, isOpen, onClose, onBookEvent }) 
           {/* CTA Footer */}
           <div className="pt-4 border-t border-paper-300 flex flex-col sm:flex-row items-center justify-between gap-4">
             <span className="text-xs text-ink-600">
-              Inspired by this production? Request a personalized dossier tailored to your venue.
+              Estimated Investment: <strong className="text-gold-900 font-serif text-sm">{event.budgetRange || '₹4.5 Crore+'}</strong> • ★ 5.0 Rating
             </span>
-            <button
-              onClick={() => {
-                onClose();
-                if (onBookEvent) onBookEvent(event);
-              }}
-              className="btn-gold px-6 py-2.5 rounded-xl text-xs uppercase font-bold tracking-wider shrink-0 w-full sm:w-auto"
-            >
-              Inquire For Similar Scale
-            </button>
+            <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+              {onViewFullPage && (
+                <button
+                  onClick={() => {
+                    onClose();
+                    onViewFullPage(event);
+                  }}
+                  className="px-4 py-2.5 rounded-xl text-xs font-semibold text-gold-900 bg-gold-100 hover:bg-gold-200 border border-gold-300 transition-all shrink-0"
+                >
+                  Full Page Dossier →
+                </button>
+              )}
+              <button
+                onClick={() => {
+                  onClose();
+                  if (onBookEvent) onBookEvent(event);
+                }}
+                className="btn-gold px-6 py-2.5 rounded-xl text-xs uppercase font-bold tracking-wider shrink-0 w-full sm:w-auto"
+              >
+                Inquire For Similar Scale
+              </button>
+            </div>
           </div>
 
         </div>

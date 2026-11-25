@@ -15,6 +15,7 @@ import AboutPage from './pages/AboutPage.jsx';
 import JournalPage from './pages/JournalPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import AdminDashboardPage from './pages/AdminDashboardPage.jsx';
+import EventDetailPage from './pages/EventDetailPage.jsx';
 import { getApiUrl } from './config/api.js';
 
 export default function App() {
@@ -79,7 +80,17 @@ export default function App() {
         return;
       }
 
-      const validPages = ['home', 'portfolio', 'services', 'packages', 'venues', 'calculator', 'about', 'journal', 'contact'];
+      if (hash.startsWith('event-')) {
+        const slug = hash.replace('event-', '');
+        const found = events.find(e => e.slug === slug || e.id === slug);
+        if (found) {
+          setSelectedEvent(found);
+          setActivePage('event-detail');
+          return;
+        }
+      }
+
+      const validPages = ['home', 'portfolio', 'services', 'packages', 'venues', 'calculator', 'about', 'journal', 'contact', 'event-detail'];
       if (pathname && validPages.includes(pathname)) {
         setActivePage(pathname);
       } else if (hash && validPages.includes(hash)) {
@@ -94,7 +105,7 @@ export default function App() {
       window.removeEventListener('hashchange', handleRoute);
       window.removeEventListener('popstate', handleRoute);
     };
-  }, []);
+  }, [events]);
 
   const changePage = (pageId) => {
     setActivePage(pageId);
@@ -105,6 +116,17 @@ export default function App() {
         window.history.pushState(null, '', '/');
       }
       window.location.hash = pageId === 'home' ? '' : pageId;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSelectEvent = (event) => {
+    setSelectedEvent(event);
+    setActivePage('event-detail');
+    if (event?.slug) {
+      window.location.hash = `event-${event.slug}`;
+    } else if (event?.id) {
+      window.location.hash = `event-${event.id}`;
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -132,7 +154,7 @@ export default function App() {
             reviews={reviews}
             stats={stats}
             setActivePage={setActivePage}
-            onSelectEvent={setSelectedEvent}
+            onSelectEvent={handleSelectEvent}
             onOpenBooking={() => setBookingModalOpen(true)}
           />
         );
@@ -140,8 +162,21 @@ export default function App() {
         return (
           <PortfolioPage
             events={events}
-            onSelectEvent={setSelectedEvent}
+            onSelectEvent={handleSelectEvent}
             onOpenBooking={() => setBookingModalOpen(true)}
+          />
+        );
+      case 'event-detail':
+        return (
+          <EventDetailPage
+            event={selectedEvent}
+            events={events}
+            onBack={() => changePage('portfolio')}
+            onOpenBooking={(evt) => {
+              setSelectedEvent(evt || selectedEvent);
+              setBookingModalOpen(true);
+            }}
+            onSelectEvent={handleSelectEvent}
           />
         );
       case 'services':
@@ -238,9 +273,10 @@ export default function App() {
 
       <CaseStudyModal
         event={selectedEvent}
-        isOpen={!!selectedEvent}
+        isOpen={!!selectedEvent && activePage !== 'event-detail'}
         onClose={() => setSelectedEvent(null)}
         onBookEvent={() => setBookingModalOpen(true)}
+        onViewFullPage={handleSelectEvent}
       />
 
     </div>
