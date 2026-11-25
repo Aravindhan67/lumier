@@ -68,28 +68,59 @@ export default function App() {
     fetchData();
   }, []);
 
-  // Handle URL hash navigation (e.g. #admin, #packages, #calculator)
+  // Handle URL navigation (/admin, #admin, or standard public pages)
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      const validPages = ['home', 'portfolio', 'services', 'packages', 'venues', 'calculator', 'about', 'journal', 'contact', 'admin'];
-      if (hash && validPages.includes(hash)) {
+    const handleRoute = () => {
+      const pathname = window.location.pathname.replace(/^\//, '').toLowerCase();
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+
+      if (pathname === 'admin' || hash === 'admin') {
+        setActivePage('admin');
+        return;
+      }
+
+      const validPages = ['home', 'portfolio', 'services', 'packages', 'venues', 'calculator', 'about', 'journal', 'contact'];
+      if (pathname && validPages.includes(pathname)) {
+        setActivePage(pathname);
+      } else if (hash && validPages.includes(hash)) {
         setActivePage(hash);
       }
     };
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+
+    handleRoute();
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('popstate', handleRoute);
+    return () => {
+      window.removeEventListener('hashchange', handleRoute);
+      window.removeEventListener('popstate', handleRoute);
+    };
   }, []);
 
   const changePage = (pageId) => {
     setActivePage(pageId);
-    window.location.hash = pageId;
+    if (pageId === 'admin') {
+      window.history.pushState(null, '', '/admin');
+    } else {
+      if (window.location.pathname === '/admin') {
+        window.history.pushState(null, '', '/');
+      }
+      window.location.hash = pageId === 'home' ? '' : pageId;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBookingSuccess = () => {
     setInquiryCount(prev => prev + 1);
   };
+
+  // SEPARATE ADMIN PANEL (Does not render on user site)
+  if (activePage === 'admin') {
+    return (
+      <div className="min-h-screen bg-paper-50 text-ink-900 selection:bg-gold-200 selection:text-gold-900 w-full max-w-full overflow-x-hidden">
+        <AdminDashboardPage onExitAdmin={() => changePage('home')} />
+      </div>
+    );
+  }
 
   const renderCurrentPage = () => {
     switch (activePage) {

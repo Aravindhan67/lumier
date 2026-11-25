@@ -151,9 +151,9 @@ export default function Footer({ setActivePage }) {
                 </button>
               </li>
               <li>
-                <button onClick={() => setActivePage('admin')} className="hover:text-gold-700 transition-colors flex items-center gap-1 font-semibold text-gold-800">
+                <button onClick={() => setActivePage('contact')} className="hover:text-gold-700 transition-colors flex items-center gap-1">
                   <ArrowUpRight className="w-3 h-3 text-gold-600" />
-                  Admin Panel (Inquiries)
+                  Private Atelier Consultations
                 </button>
               </li>
             </ul>

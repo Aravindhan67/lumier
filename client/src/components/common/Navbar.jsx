@@ -51,7 +51,6 @@ export default function Navbar({ activePage, setActivePage, onOpenBooking, inqui
     { id: 'about', label: 'About', icon: BookOpen },
     { id: 'journal', label: 'Journal', icon: FileText },
     { id: 'contact', label: 'Contact', icon: Send },
-    { id: 'admin', label: 'Admin', icon: ShieldCheck },
   ];
 
   // Dynamic slot 3 based on active page
@@ -99,22 +98,9 @@ export default function Navbar({ activePage, setActivePage, onOpenBooking, inqui
             <span className="text-ink-500">2025/2026 Auspicious Muhurat Dates Now Open</span>
           </div>
           <div className="flex items-center space-x-4">
-            <button 
-              onClick={() => handleNavClick('admin')}
-              className="text-ink-600 hover:text-gold-700 transition-colors flex items-center gap-1.5"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-gold-600" />
-              <span className="font-semibold text-gold-900">Admin Panel</span>
-              {inquiryCount > 0 && (
-                <span className="bg-gold-100 text-gold-900 text-[10px] px-1.5 py-0.2 rounded-full border border-gold-300 font-semibold">
-                  {inquiryCount}
-                </span>
-              )}
-            </button>
-            <span className="text-paper-300">|</span>
             <a href="tel:+919820058643" className="text-ink-600 hover:text-gold-700 transition-colors flex items-center gap-1 font-medium">
               <PhoneCall className="w-3 h-3 text-gold-600" />
-              <span>+91 98200 58643</span>
+              <span>Concierge: +91 98200 58643</span>
             </a>
           </div>
         </div>
@@ -272,30 +258,6 @@ export default function Navbar({ activePage, setActivePage, onOpenBooking, inqui
               </button>
             );
           })}
-
-          {/* Concierge Portal Option */}
-          <div className="pt-3 mt-2 border-t border-paper-200">
-            <button
-              onClick={() => handleNavClick('admin')}
-              className={`w-full px-3.5 py-3 rounded-xl text-xs font-semibold flex items-center justify-between transition-all ${
-                activePage === 'admin'
-                  ? 'bg-gold-100 text-gold-950 border border-gold-400'
-                  : 'bg-paper-100 text-ink-800 hover:bg-paper-200'
-              }`}
-            >
-              <div className="flex items-center space-x-2.5">
-                <ShieldCheck className="w-4 h-4 text-gold-600" />
-                <span>Admin Panel</span>
-              </div>
-              {inquiryCount > 0 ? (
-                <span className="bg-gold-600 text-white font-bold text-[10px] px-2 py-0.5 rounded-full">
-                  {inquiryCount} New
-                </span>
-              ) : (
-                <span className="text-[10px] text-ink-500 uppercase tracking-wider">Access</span>
-              )}
-            </button>
-          </div>
         </div>
 
         {/* Drawer Footer Actions */}
