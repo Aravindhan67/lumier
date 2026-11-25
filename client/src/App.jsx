@@ -180,7 +180,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-paper-50 text-ink-900 selection:bg-gold-200 selection:text-gold-900">
+    <div className="min-h-screen flex flex-col bg-paper-50 text-ink-900 selection:bg-gold-200 selection:text-gold-900 w-full max-w-full overflow-x-hidden">
       
       {/* Navigation */}
       <Navbar
@@ -191,7 +191,7 @@ export default function App() {
       />
 
       {/* Main Page Content */}
-      <main className="flex-1 pb-28 lg:pb-0">
+      <main className="flex-1 pb-28 lg:pb-0 w-full max-w-full overflow-x-hidden">
         {renderCurrentPage()}
       </main>
 

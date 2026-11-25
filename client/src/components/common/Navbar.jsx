@@ -121,24 +121,24 @@ export default function Navbar({ activePage, setActivePage, onOpenBooking, inqui
       </div>
 
       {/* 2. MAIN HEADER (Desktop & Mobile Top Header) */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-paper-300/70 shadow-lux-sm transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20 gap-2 xl:gap-4">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-paper-300/70 shadow-lux-sm transition-all duration-300 w-full max-w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full">
+          <div className="flex items-center justify-between h-16 sm:h-20 gap-2 xl:gap-4 w-full">
             
             {/* Brand Logo */}
             <button 
               onClick={() => handleNavClick('home')}
-              className="flex items-center space-x-2.5 sm:space-x-3 text-left group shrink-0"
+              className="flex items-center space-x-2 sm:space-x-3 text-left group min-w-0"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-gold-600 via-gold-500 to-amber-300 flex items-center justify-center text-white font-serif font-black text-xl shadow-md shadow-gold-600/20 group-hover:scale-105 transition-transform">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-gold-600 via-gold-500 to-amber-300 flex items-center justify-center text-white font-serif font-black text-base sm:text-xl shadow-md shadow-gold-600/20 group-hover:scale-105 transition-transform shrink-0">
                 L
               </div>
-              <div>
-                <span className="font-serif tracking-widest text-lg sm:text-xl font-bold uppercase gold-text-gradient block">
+              <div className="min-w-0">
+                <span className="font-serif tracking-widest text-base sm:text-xl font-bold uppercase gold-text-gradient block truncate">
                   LUMIÈRE
                 </span>
-                <span className="text-[10px] tracking-[0.22em] text-ink-500 uppercase font-sans block -mt-1 font-semibold">
-                  India • Royal Events & Production
+                <span className="text-[9px] sm:text-[10px] tracking-wider sm:tracking-[0.22em] text-ink-500 uppercase font-sans block -mt-0.5 sm:-mt-1 font-semibold truncate">
+                  <span className="hidden xs:inline">India • </span>Royal Events & Production
                 </span>
               </div>
             </button>
@@ -167,7 +167,7 @@ export default function Navbar({ activePage, setActivePage, onOpenBooking, inqui
             </nav>
 
             {/* Desktop Right Action Button */}
-            <div className="hidden sm:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4 shrink-0">
               <button
                 onClick={onOpenBooking}
                 className="btn-gold px-5 py-2.5 rounded-xl text-xs uppercase tracking-widest font-semibold flex items-center space-x-2 shadow-md text-white"
@@ -178,10 +178,10 @@ export default function Navbar({ activePage, setActivePage, onOpenBooking, inqui
             </div>
 
             {/* Mobile Top Header Actions */}
-            <div className="flex lg:hidden items-center space-x-2">
+            <div className="flex lg:hidden items-center space-x-2 shrink-0">
               <button
                 onClick={onOpenBooking}
-                className="btn-gold px-3.5 py-1.5 rounded-xl text-xs tracking-wider uppercase font-semibold text-white"
+                className="btn-gold px-3 sm:px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs tracking-wider uppercase font-semibold text-white whitespace-nowrap"
               >
                 Inquire
               </button>
@@ -189,7 +189,7 @@ export default function Navbar({ activePage, setActivePage, onOpenBooking, inqui
               {/* Button to open Side Nav Bar */}
               <button
                 onClick={() => setSideMenuOpen(true)}
-                className="p-2.5 rounded-xl text-ink-800 hover:text-gold-800 hover:bg-paper-100 border border-paper-300 relative"
+                className="p-2 sm:p-2.5 rounded-xl text-ink-800 hover:text-gold-800 hover:bg-paper-100 border border-paper-300 relative shrink-0"
                 aria-label="Open Side Navigation Drawer"
               >
                 <Menu className="w-5 h-5" />

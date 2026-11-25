@@ -35,9 +35,9 @@ export default function Footer({ setActivePage }) {
   ];
 
   return (
-    <footer className="bg-paper-100 border-t border-paper-300 pt-20 pb-12 relative overflow-hidden">
+    <footer className="bg-paper-100 border-t border-paper-300 pt-20 pb-12 relative overflow-hidden w-full max-w-full">
       {/* Subtle warm background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-gradient-to-b from-gold-200/40 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-full h-32 bg-gradient-to-b from-gold-200/40 to-transparent blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-paper-300">

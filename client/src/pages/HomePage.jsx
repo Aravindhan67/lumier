@@ -222,9 +222,9 @@ export default function HomePage({
     <div className="space-y-20 sm:space-y-28">
       
       {/* 1. HERO SECTION (Minimal Editorial Typography & Scrolling Carousel) */}
-      <section className="relative min-h-[85vh] flex flex-col items-center justify-center pt-8 pb-12 overflow-hidden aurora-bg">
+      <section className="relative min-h-[85vh] flex flex-col items-center justify-center pt-8 pb-12 overflow-hidden aurora-bg w-full max-w-full">
         {/* Subtle Ambient Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-200/35 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] h-[320px] sm:h-[600px] bg-gold-200/35 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6 w-full">
           
@@ -235,13 +235,13 @@ export default function HomePage({
           </div>
 
           {/* Minimal Editorial Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold text-ink-950 tracking-tight leading-[1.08]">
-            Where Royal Heritage Meets <br />
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-bold text-ink-950 tracking-tight leading-[1.12] sm:leading-[1.08] break-words">
+            Where Royal Heritage Meets <br className="hidden sm:inline" />
             <span className="gold-text-gradient italic font-normal">Modern Splendor</span>
           </h1>
 
           {/* Minimal Subtitle */}
-          <p className="max-w-xl mx-auto text-base sm:text-lg text-ink-600 font-light leading-relaxed">
+          <p className="max-w-xl mx-auto text-sm sm:text-lg text-ink-600 font-light leading-relaxed px-2">
             Curating royal destination weddings and monumental celebrations across Udaipur, Jaipur, Jodhpur, and Goa.
           </p>
 
@@ -265,7 +265,7 @@ export default function HomePage({
 
           {/* SCROLLING SHOWCASE CAROUSEL (Minimal Text) */}
           <div 
-            className="relative pt-6 max-w-6xl mx-auto"
+            className="relative pt-6 max-w-6xl mx-auto w-full overflow-hidden"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -311,7 +311,7 @@ export default function HomePage({
                       isActive 
                         ? 'border-2 border-gold-400 shadow-lux-lg' 
                         : 'border border-gold-300/70 shadow-lux hover:border-gold-400'
-                    } w-[280px] sm:w-[360px] md:w-[380px] h-[340px] sm:h-[380px] flex flex-col justify-between`}
+                    } w-[260px] xs:w-[280px] sm:w-[360px] md:w-[380px] h-[330px] sm:h-[380px] flex flex-col justify-between`}
                   >
                     <img
                       src={card.image}

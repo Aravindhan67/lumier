@@ -4,7 +4,7 @@ export default function Marquee({ items, reverse = false, speed = '35s' }) {
   const repeatedItems = [...items, ...items, ...items];
 
   return (
-    <div className="relative w-full overflow-hidden py-4 select-none">
+    <div className="relative w-full max-w-full overflow-hidden py-4 select-none">
       {/* Edge Gradients for smooth fade - Lite ivory fade */}
       <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-paper-50 to-transparent z-10" />
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-paper-50 to-transparent z-10" />
