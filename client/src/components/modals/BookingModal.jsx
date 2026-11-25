@@ -13,6 +13,7 @@ import {
   User
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { getApiUrl } from '../../config/api.js';
 
 export default function BookingModal({ isOpen, onClose, onBookingSuccess }) {
   const [step, setStep] = useState(1);
@@ -76,7 +77,7 @@ export default function BookingModal({ isOpen, onClose, onBookingSuccess }) {
     setSubmitting(true);
 
     try {
-      const res = await fetch('/api/inquiries', {
+      const res = await fetch(getApiUrl('/api/inquiries'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

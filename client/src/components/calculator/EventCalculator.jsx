@@ -9,6 +9,7 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import SpotlightCard from '../common/SpotlightCard.jsx';
+import { getApiUrl } from '../../config/api.js';
 
 // Indian numbering format helper (Lakhs & Crores)
 function formatINR(val) {
@@ -52,7 +53,7 @@ export default function EventCalculator({ onOpenBooking }) {
   const computeEstimate = async () => {
     setCalculating(true);
     try {
-      const res = await fetch('/api/quote-calculator', {
+      const res = await fetch(getApiUrl('/api/quote-calculator'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

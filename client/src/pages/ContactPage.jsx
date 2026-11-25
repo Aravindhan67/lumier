@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import SpotlightCard from '../components/common/SpotlightCard.jsx';
 import confetti from 'canvas-confetti';
+import { getApiUrl } from '../config/api.js';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -64,7 +65,7 @@ export default function ContactPage() {
     setSubmitting(true);
 
     try {
-      const res = await fetch('/api/inquiries', {
+      const res = await fetch(getApiUrl('/api/inquiries'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

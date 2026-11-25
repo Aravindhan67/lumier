@@ -15,6 +15,7 @@ import AboutPage from './pages/AboutPage.jsx';
 import JournalPage from './pages/JournalPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import AdminDashboardPage from './pages/AdminDashboardPage.jsx';
+import { getApiUrl } from './config/api.js';
 
 export default function App() {
   const [activePage, setActivePage] = useState('home');
@@ -41,14 +42,14 @@ export default function App() {
     const fetchData = async () => {
       try {
         const [evtRes, srvRes, pkgRes, venRes, revRes, postRes, statsRes, inqRes] = await Promise.allSettled([
-          fetch('/api/events').then(r => r.json()),
-          fetch('/api/services').then(r => r.json()),
-          fetch('/api/packages').then(r => r.json()),
-          fetch('/api/venues').then(r => r.json()),
-          fetch('/api/reviews').then(r => r.json()),
-          fetch('/api/posts').then(r => r.json()),
-          fetch('/api/stats').then(r => r.json()),
-          fetch('/api/inquiries').then(r => r.json()),
+          fetch(getApiUrl('/api/events')).then(r => r.json()),
+          fetch(getApiUrl('/api/services')).then(r => r.json()),
+          fetch(getApiUrl('/api/packages')).then(r => r.json()),
+          fetch(getApiUrl('/api/venues')).then(r => r.json()),
+          fetch(getApiUrl('/api/reviews')).then(r => r.json()),
+          fetch(getApiUrl('/api/posts')).then(r => r.json()),
+          fetch(getApiUrl('/api/stats')).then(r => r.json()),
+          fetch(getApiUrl('/api/inquiries')).then(r => r.json()),
         ]);
 
         if (evtRes.status === 'fulfilled' && evtRes.value.success) setEvents(evtRes.value.data);

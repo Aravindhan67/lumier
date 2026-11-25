@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Sparkles, Send, MapPin, Mail, Phone, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { getApiUrl } from '../../config/api.js';
 
 export default function Footer({ setActivePage }) {
   const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ export default function Footer({ setActivePage }) {
     setLoading(true);
 
     try {
-      await fetch('/api/newsletter', {
+      await fetch(getApiUrl('/api/newsletter'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

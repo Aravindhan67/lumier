@@ -7,6 +7,7 @@ import {
   MapPin 
 } from 'lucide-react';
 import SpotlightCard from '../components/common/SpotlightCard.jsx';
+import { getApiUrl } from '../config/api.js';
 
 export default function AdminDashboardPage() {
   const [inquiries, setInquiries] = useState([]);
@@ -17,7 +18,7 @@ export default function AdminDashboardPage() {
   const fetchInquiries = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/inquiries');
+      const res = await fetch(getApiUrl('/api/inquiries'));
       const data = await res.json();
       if (data.success) {
         setInquiries(data.data);
@@ -36,7 +37,7 @@ export default function AdminDashboardPage() {
   const handleStatusUpdate = async (id, newStatus) => {
     setUpdatingId(id);
     try {
-      const res = await fetch(`/api/inquiries/${id}/status`, {
+      const res = await fetch(getApiUrl(`/api/inquiries/${id}/status`), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })
